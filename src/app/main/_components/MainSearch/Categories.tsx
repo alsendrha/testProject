@@ -12,7 +12,7 @@ const Categories = ({ categoryName, onClick }: CategoriesProps) => {
       className="flex items-center pl-[22px] pr-[10px] cursor-pointer relative"
       onClick={onClick}
     >
-      <p className="text-[20px] font-suitMedium mr-[33px]">{categoryName}</p>
+      <p className="text-[20px] font-medium mr-[33px]">{categoryName}</p>
       <CategoryDownArrow />
     </div>
   );

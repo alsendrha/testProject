@@ -8,13 +8,6 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
-      fontFamily: {
-        suitRegular: ["SUIT-Regular"],
-        suitMedium: ["SUIT-Medium"],
-        suitBold: ["SUIT-Bold"],
-        suitExtraBold: ["SUIT-ExtraBold"],
-        suitHeavy: ["SUIT-Heavy"],
-      },
     },
   },
   plugins: [],

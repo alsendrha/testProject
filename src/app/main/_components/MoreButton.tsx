@@ -6,7 +6,7 @@ const MoreButton = () => {
     <div className="mt-[60px] mb-[107px] flex justify-center ">
       <Link href={"/list"}>
         <div className="rounded-[30px] border self-start px-[36px] py-[18px]">
-          <p className="text-[20px] font-suitMedium">여행지 더보기 +</p>
+          <p className="text-[20px] font-medium">여행지 더보기 +</p>
         </div>
       </Link>
     </div>

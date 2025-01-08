@@ -20,10 +20,10 @@ const TopBanner = () => {
             link="https://tripmate-be.shop/oauth2/authorization/naver"
           />
           <div className="flex flex-col items-center mx-[44px]">
-            <p className="font-suitExtraBold text-[60px] leading-[75px]">
+            <p className="font-extrabold text-[60px] leading-[75px]">
               PLAN YOUR TRIP
             </p>
-            <p className="font-suitMedium text-[26px] leading-[32px] mt-[8px]">
+            <p className="font-medium text-[26px] leading-[32px] mt-[8px]">
               나만의 여행을 계획하세요
             </p>
           </div>

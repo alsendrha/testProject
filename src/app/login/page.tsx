@@ -1,11 +1,7 @@
 import React from "react";
 
-const Login = () => {
-  return (
-    <div className="w-full bg-[red] border">
-      <p>ㅓㄹ머ㅏㅣ러ㅏㅣㅁㄴ어라ㅣ너마ㅣㅏㅓasdasdsadㅣ</p>
-    </div>
-  );
+const page = () => {
+  return <div>page</div>;
 };
 
-export default Login;
+export default page;

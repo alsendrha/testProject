@@ -26,10 +26,10 @@ const MenuItem = ({ item }: MenuItemProps) => {
         />
       </div>
       <div className="mt-[20px]">
-        <p className="text-[22px] font-suitExtraBold">{item.name}</p>
+        <p className="text-[22px] font-extrabold">{item.name}</p>
         <div className="flex items-center">
           <Position />
-          <p className="text-[16px] ml-[4px] font-suitMedium">{item.address}</p>
+          <p className="text-[16px] ml-[4px] font-medium">{item.address}</p>
         </div>
       </div>
     </Link>
