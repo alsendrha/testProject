@@ -5,20 +5,35 @@ import React from "react";
 
 type MenuItemProps = {
   item: {
-    id: number;
-    name: string;
-    address: string;
-    image: string;
-    link: string;
+    addr1: string;
+    addr2: string;
+    areacode: number;
+    booktour: number;
+    cat1: string;
+    cat2: string;
+    cat3: string;
+    contentid: number;
+    contenttypeid: number;
+    cpyrhtDivCd: string;
+    createdtime: number;
+    firstimage: string;
+    firstimage2: string;
+    mapx: number;
+    mapy: number;
+    mlevel: number;
+    modifiedtime: number;
+    sigungucode: number;
+    tel: string;
+    title: string;
   };
 };
 
 const MenuItem = ({ item }: MenuItemProps) => {
   return (
-    <Link href={item.link}>
+    <Link href={item.contentid.toString()}>
       <div className="w-[330px] h-[500px] rounded-[20px] relative overflow-hidden">
         <Image
-          src={item.image}
+          src={item.firstimage}
           className="object-cover"
           fill
           sizes="1"
@@ -26,10 +41,10 @@ const MenuItem = ({ item }: MenuItemProps) => {
         />
       </div>
       <div className="mt-[20px]">
-        <p className="text-[22px] font-extrabold">{item.name}</p>
+        <p className="text-[22px] font-extrabold">{item.title}</p>
         <div className="flex items-center">
           <Position />
-          <p className="text-[16px] ml-[4px] font-medium">{item.address}</p>
+          <p className="text-[16px] ml-[4px] font-medium">{`${item.addr1} ${item.addr2}`}</p>
         </div>
       </div>
     </Link>
