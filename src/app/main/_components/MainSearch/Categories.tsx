@@ -1,5 +1,4 @@
 import CategoryDownArrow from "@/utils/svg/CategoryDownArrow";
-import React from "react";
 
 type CategoriesProps = {
   categoryName: string;
@@ -12,7 +11,9 @@ const Categories = ({ categoryName, onClick }: CategoriesProps) => {
       className="flex items-center pl-[22px] pr-[10px] cursor-pointer relative"
       onClick={onClick}
     >
-      <p className="text-[20px] font-medium mr-[33px]">{categoryName}</p>
+      <p className="text-[20px] text-[#333333] font-medium mr-[33px]">
+        {categoryName}
+      </p>
       <CategoryDownArrow />
     </div>
   );
