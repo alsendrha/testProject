@@ -1,11 +1,7 @@
-type PlaceBannerTitleProps = {
-  menuName: string;
-};
-
-const PlaceBannerTitle = ({ menuName }: PlaceBannerTitleProps) => {
+const PlaceBannerTitle = () => {
   return (
-    <p className="text-[56px] text-[#AED400] font-semibold">
-      {menuName} <span className="text-[#353535]">여행지</span>
+    <p className="text-[56px] leading-1 text-white font-semibold">
+      Plan your trip
     </p>
   );
 };

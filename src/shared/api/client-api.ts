@@ -1,26 +1,24 @@
-import axios from 'axios'
-
-export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || ''
+import axios from "axios";
 
 export const createClientApi = () => {
   const api = axios.create({
-    baseURL: BASE_URL,
+    baseURL: "https://tripmate-be.shop",
     timeout: 5000,
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     withCredentials: true,
-  })
+  });
 
   api.interceptors.request.use(
     (config) => {
-      config.withCredentials = true
-      return config
+      config.withCredentials = true;
+      return config;
     },
     (error) => {
-      return Promise.reject(error)
+      return Promise.reject(error);
     }
-  )
+  );
 
   api.interceptors.response.use(
     (response) => response,
@@ -33,9 +31,9 @@ export const createClientApi = () => {
       //     window.location.href = '/login'
       //   }
       // }
-      return Promise.reject(error)
+      return Promise.reject(error);
     }
-  )
+  );
 
-  return api
-}
+  return api;
+};

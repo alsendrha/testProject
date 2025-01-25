@@ -45,8 +45,8 @@ const MainItemList = () => {
         contentTypeId: listType,
       });
       setIsLoading(false);
-      setTourList(data.response.body.items.item ?? []);
-      console.log(data.response.body.items.item);
+      setTourList(data ?? []);
+      console.log(data);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -68,8 +68,12 @@ const MainItemList = () => {
         />
       </div>
       {isLoading ? (
-        <div className="flex justify-center gap-[40px] flex-wrap mt-[111px]">
-          <Skeleton />
+        <div className="w-full">
+          <div className="w-full flex justify-center gap-[40px] flex-wrap mt-[111px]">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <Skeleton key={index} skeletonType="main" />
+            ))}
+          </div>
         </div>
       ) : (
         <div className="w-full">

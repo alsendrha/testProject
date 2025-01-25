@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const MainNav = () => {
   return (
-    <nav className="w-full max-w-[1920px] h-[100px] flex items-center px-[50px] justify-between bg-[rgba(0,0,0,0.1)] absolute z-10">
+    <nav className="w-full max-w-[1920px] h-[100px] flex items-center px-[50px] justify-between bg-[#F5F5F5] bg-opacity-60 absolute z-10">
       <Link href={"/"}>
         <p className="text-[40px] leading-[50px] text-[#111111] font-medium">
           TripMate
