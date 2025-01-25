@@ -9,6 +9,7 @@ import DetailOverview from "./_components/DetailOverview";
 import DetailTopTitle from "./_components/DetailTopTitle";
 import DetailContentLeft from "./_components/detailContent/DetailContentLeft";
 import DetailContentRight from "./_components/detailContent/DetailContentRight";
+import DetailSkeleton from "./_components/detailSkeleton/DetailSkeleton";
 
 type DetailData = {
   addr1: string;
@@ -73,7 +74,7 @@ const DetailPage = () => {
   return (
     <>
       {isLoading ? (
-        <div>로딩중</div>
+        <DetailSkeleton />
       ) : (
         detailData.map((data: DetailData) => (
           <div key={data.contentid} className="pt-[100px]">
