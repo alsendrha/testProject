@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --rdp-selected-border: 1px solid var(--rdp-accent-color);
 }
 
 @media (prefers-color-scheme: dark) {
