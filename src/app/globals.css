@@ -12,6 +12,21 @@
   --rdp-selected-border: 1px solid var(--rdp-accent-color);
 }
 
+.alert_animation {
+  animation: fadeIn 300ms;
+  transform: all 300ms ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.5);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

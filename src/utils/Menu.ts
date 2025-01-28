@@ -1,7 +1,7 @@
 export const menuList = [
   { id: 1, name: "HOME", link: "/" },
   { id: 2, name: "PLACE", link: "/place" },
-  { id: 3, name: "PLAN", link: "/plan" },
+  { id: 3, name: "PLAN", link: "/planList" },
   { id: 4, name: "HELP", link: "/help" },
 ];
 

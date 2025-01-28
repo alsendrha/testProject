@@ -12,8 +12,9 @@ const PlacePage = () => {
   const params = useSearchParams();
   const [tourList, setTourList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [listType, setListType] = useState(Number(params.get("ct")) ?? 12);
+  const [listType, setListType] = useState(Number(params.get("ct")) || 12);
   const [keyword, setKeyword] = useState(params.get("kd")?.toString() ?? "");
+  console.log("나와라", Number(params.get("ct")));
   const [rankingName, setRankingName] = useState({
     name: "제목순",
     value: "A",

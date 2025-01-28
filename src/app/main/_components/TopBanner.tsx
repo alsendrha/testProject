@@ -1,8 +1,34 @@
+"use client";
+
+import { createClientApi } from "@/shared/api/client-api";
 import Image from "next/image";
-import React from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import TripCreateButton from "./TripCreateButton";
 
 const TopBanner = () => {
+  const params = useSearchParams();
+  const code = params.get("code");
+
+  const kakaoLogin = async () => {
+    const api = createClientApi();
+    try {
+      const response = await api.post("/oauth/token", {
+        authorizationCode: code,
+        socialType: "kakao",
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (code) {
+      kakaoLogin();
+    }
+  }, [code]);
+
   return (
     <div className="w-full h-[600px] relative">
       <Image
@@ -17,7 +43,7 @@ const TopBanner = () => {
           <TripCreateButton
             title="ALONE"
             buttonPosition="left"
-            link="https://tripmate-be.shop/oauth2/authorization/naver"
+            link={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=438cf3e1fed5cae3fa8aba30fd11373c&redirect_uri=http://localhost:3000/main&prompt=login`}
           />
           <div className="flex flex-col items-center mx-[44px]">
             <p className="font-extrabold text-[60px] leading-[75px]">
