@@ -1,34 +1,7 @@
-"use client";
-
-import { createClientApi } from "@/shared/api/client-api";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import TripCreateButton from "./TripCreateButton";
 
 const TopBanner = () => {
-  const params = useSearchParams();
-  const code = params.get("code");
-
-  const kakaoLogin = async () => {
-    const api = createClientApi();
-    try {
-      const response = await api.post("/oauth/token", {
-        authorizationCode: code,
-        socialType: "kakao",
-      });
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    if (code) {
-      kakaoLogin();
-    }
-  }, [code]);
-
   return (
     <div className="w-full h-[600px] relative">
       <Image
