@@ -23,6 +23,7 @@ const PlanDateSelect = ({
     <div className="w-full mt-[25px]">
       <PlanSubTitle cType="title" title="여행 기간" />
       <div className="w-full relative flex justify-between items-center">
+        {isOpen && <div className="w-full h-[60px] absolute top-0" />}
         <PlanDateButton onClick={onClick} title={selectedDate.startDate} />
         <p>-</p>
         <PlanDateButton onClick={onClick} title={selectedDate.endDate} />

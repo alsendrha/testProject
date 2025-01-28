@@ -1,6 +1,8 @@
+import { Ref } from "react";
 import DropItem from "./DropItem";
 
 type MenuListProps = {
+  ref: Ref<HTMLDivElement>;
   rankingOpen?: boolean;
   numOfRowOpen?: boolean;
   numOfRowName?: string;
@@ -12,6 +14,7 @@ type MenuListProps = {
 };
 
 const MenuList = ({
+  ref,
   rankingOpen,
   numOfRowOpen,
   numOfRowName,
@@ -34,7 +37,7 @@ const MenuList = ({
   ];
 
   return (
-    <div className="absolute top-[70px]">
+    <div ref={ref} className="absolute top-[70px]">
       {numOfRowOpen ? (
         <DropItem
           type="numOfRow"

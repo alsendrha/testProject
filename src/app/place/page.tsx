@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getData } from "../main/_api";
 import Skeleton from "../main/_components/Skeleton";
-import PlaceTopBanner from "./_components/placeBanner/PlaceTopBanner";
+import PlaceBanner from "./_components/placeBanner/PlaceBanner";
 import ContentList from "./_components/placeContent/contentList/ContentList";
 import DropList from "./_components/placeContent/dropList/DropList";
 
@@ -45,10 +45,9 @@ const PlacePage = () => {
 
   return (
     <div className="pt-[100px]">
-      <PlaceTopBanner
+      <PlaceBanner
         keyword={keyword}
         setKeyword={setKeyword}
-        listType={listType}
         setListType={setListType}
         onClick={getTourList}
       />
@@ -63,9 +62,7 @@ const PlacePage = () => {
 
           {isLoading ? (
             <div className="w-full flex justify-center gap-[40px] flex-wrap">
-              {Array.from({ length: 8 }).map((_, index) => (
-                <Skeleton key={index} skeletonType="place" />
-              ))}
+              <Skeleton length={8} skeletonType="place" />
             </div>
           ) : (
             <ContentList tourList={tourList} />

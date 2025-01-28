@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.skeleton {
+  @apply bg-skeleton-shimmer bg-shimmer animate-shimmer;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

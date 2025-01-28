@@ -60,24 +60,3 @@ export const itemList = [
     link: "/detail/6",
   },
 ];
-
-export const planList = [
-  { name: "전국", code: 1 },
-  { name: "서울", code: 2 },
-  { name: "인천", code: 3 },
-  { name: "대전", code: 4 },
-  { name: "대구", code: 5 },
-  { name: "광주", code: 6 },
-  { name: "부산", code: 7 },
-  { name: "울산", code: 8 },
-  { name: "세종", code: 9 },
-  { name: "경기", code: 10 },
-  { name: "강원", code: 11 },
-  { name: "충북", code: 12 },
-  { name: "충남", code: 13 },
-  { name: "경북", code: 14 },
-  { name: "경남", code: 15 },
-  { name: "전북", code: 16 },
-  { name: "전남", code: 17 },
-  { name: "제주", code: 18 },
-];

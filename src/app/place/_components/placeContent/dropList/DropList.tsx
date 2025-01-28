@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useOnclickOutside } from "@/hooks/useOnClickOutSide";
+import { useRef, useState } from "react";
 import DropDown from "./dropMenu/DropDown";
 import MenuList from "./dropMenu/MenuList";
 
@@ -17,17 +18,24 @@ const DropList = ({
 }: DropListProps) => {
   const [numOfRowOpen, setNumOfRowOpen] = useState(false);
   const [rankingOpen, setRankingOpen] = useState(false);
+  const dropRef = useRef(null);
+  const dropRef2 = useRef(null);
+
+  useOnclickOutside(dropRef, () => setRankingOpen(false));
+  useOnclickOutside(dropRef2, () => setNumOfRowOpen(false));
 
   return (
     <div className="w-full flex gap-[10px] justify-end items-center z-10">
       <div className="relative">
         <DropDown
+          dropOpen={rankingOpen}
           type="ranking"
           title={rankingName.name}
           onClick={() => setRankingOpen(!rankingOpen)}
         />
         {rankingOpen && (
           <MenuList
+            ref={dropRef}
             setRankingOpen={setRankingOpen}
             rankingOpen={rankingOpen}
             setRankingName={setRankingName}
@@ -37,12 +45,14 @@ const DropList = ({
       </div>
       <div className="relative">
         <DropDown
+          dropOpen={numOfRowOpen}
           type="numOfRow"
           title={numOfRowName.name}
           onClick={() => setNumOfRowOpen(!numOfRowOpen)}
         />
         {numOfRowOpen && (
           <MenuList
+            ref={dropRef2}
             setNumOfRowOpen={setNumOfRowOpen}
             numOfRowOpen={numOfRowOpen}
             setNumOfRowName={setNumOfRowName}
