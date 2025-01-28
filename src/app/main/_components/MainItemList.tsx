@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../_api";
 import MainSearch from "./MainSearch/MainSearch";
 import MenuItem from "./MenuItem";
+import MoreButton from "./MoreButton";
 import Skeleton from "./Skeleton";
 
 type MainItemListProps = {
@@ -58,31 +59,34 @@ const MainItemList = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="mt-[90px] flex justify-center bg-white">
-        <MainSearch
-          searchText={searchText}
-          setSearchText={setSearchText}
-          setListType={setListType}
-          onClick={getTourList}
-        />
+    <>
+      <div className="flex flex-col items-center justify-center">
+        <div className="mt-[90px] flex justify-center bg-white">
+          <MainSearch
+            searchText={searchText}
+            setSearchText={setSearchText}
+            setListType={setListType}
+            onClick={getTourList}
+          />
+        </div>
+        {isLoading ? (
+          <div className="w-full">
+            <div className="w-full flex justify-center gap-[40px] flex-wrap mt-[111px]">
+              <Skeleton length={4} skeletonType="main" />
+            </div>
+          </div>
+        ) : (
+          <div className="w-full">
+            <div className="flex justify-center gap-[40px] flex-wrap mt-[111px]">
+              {tourList.map((item) => (
+                <MenuItem key={item.contentid} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-      {isLoading ? (
-        <div className="w-full">
-          <div className="w-full flex justify-center gap-[40px] flex-wrap mt-[111px]">
-            <Skeleton length={4} skeletonType="main" />
-          </div>
-        </div>
-      ) : (
-        <div className="w-full">
-          <div className="flex justify-center gap-[40px] flex-wrap mt-[111px]">
-            {tourList.map((item) => (
-              <MenuItem key={item.contentid} item={item} />
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+      <MoreButton listType={listType} searchText={searchText} />
+    </>
   );
 };
 
