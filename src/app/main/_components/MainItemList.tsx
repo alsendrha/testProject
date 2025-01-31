@@ -35,6 +35,7 @@ const MainItemList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [listType, setListType] = useState(12);
   const [searchText, setSearchText] = useState("");
+
   const getTourList = async () => {
     try {
       setIsLoading(true);
@@ -69,21 +70,15 @@ const MainItemList = () => {
             onClick={getTourList}
           />
         </div>
-        {isLoading ? (
-          <div className="w-full">
-            <div className="w-full flex justify-center gap-[40px] flex-wrap mt-[111px]">
-              <Skeleton length={4} skeletonType="main" />
-            </div>
-          </div>
-        ) : (
-          <div className="w-full">
-            <div className="flex justify-center gap-[40px] flex-wrap mt-[111px]">
-              {tourList.map((item) => (
-                <MenuItem key={item.contentid} item={item} />
-              ))}
-            </div>
-          </div>
-        )}
+        <div className="w-full flex justify-center gap-[40px] flex-wrap mt-[111px]">
+          {isLoading ? (
+            <Skeleton length={4} skeletonType="main" />
+          ) : (
+            tourList.map((item) => (
+              <MenuItem key={item.contentid} item={item} />
+            ))
+          )}
+        </div>
       </div>
       <MoreButton listType={listType} searchText={searchText} />
     </>

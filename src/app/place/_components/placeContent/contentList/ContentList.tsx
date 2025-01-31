@@ -27,7 +27,7 @@ type ContentListProps = {
 
 const ContentList = ({ tourList }: ContentListProps) => {
   return (
-    <div className="w-full pt-[40px] pb-[150px] flex justify-center items-center gap-[40px] flex-wrap">
+    <>
       {tourList.map((item) => (
         <ContentItem
           href={`/place/${item.contentid}t${item.contenttypeid}`}
@@ -37,7 +37,7 @@ const ContentList = ({ tourList }: ContentListProps) => {
           content="dddd"
         />
       ))}
-    </div>
+    </>
   );
 };
 

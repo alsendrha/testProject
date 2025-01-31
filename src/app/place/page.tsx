@@ -14,7 +14,6 @@ const PlacePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [listType, setListType] = useState(Number(params.get("ct")) || 12);
   const [keyword, setKeyword] = useState(params.get("kd")?.toString() ?? "");
-  console.log("나와라", Number(params.get("ct")));
   const [rankingName, setRankingName] = useState({
     name: "제목순",
     value: "A",
@@ -54,22 +53,21 @@ const PlacePage = () => {
         setListType={setListType}
         onClick={getTourList}
       />
-      <div className="w-full px-[223px]">
-        <div className="w-full flex flex-col items-center justify-center pt-[40px]">
+      <div className="w-full flex justify-center px-[30px]">
+        <div className="w-[1440px] flex flex-col items-center justify-center pt-[40px]">
           <DropList
             rankingName={rankingName}
             setRankingName={setRankingName}
             numOfRowName={numOfRowName}
             setNumOfRowName={setNumOfRowName}
           />
-
-          {isLoading ? (
-            <div className="w-full flex justify-center gap-[40px] flex-wrap">
+          <div className="pt-[40px] pb-[150px] flex justify-center items-center gap-[40px] flex-wrap">
+            {isLoading ? (
               <Skeleton length={8} skeletonType="place" />
-            </div>
-          ) : (
-            <ContentList tourList={tourList} />
-          )}
+            ) : (
+              <ContentList tourList={tourList} />
+            )}
+          </div>
         </div>
       </div>
     </div>
