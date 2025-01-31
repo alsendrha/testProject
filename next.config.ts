@@ -4,7 +4,12 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: false,
   images: {
-    domains: ["tong.visitkorea.or.kr"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "tong.visitkorea.or.kr",
+      },
+    ],
   },
 };
 

@@ -13,11 +13,7 @@ const TopBanner = () => {
       />
       <div className="absolute w-full h-full pt-[255px] text-white">
         <div className="w-full flex justify-center">
-          <TripCreateButton
-            title="ALONE"
-            buttonPosition="left"
-            link={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=438cf3e1fed5cae3fa8aba30fd11373c&redirect_uri=http://localhost:3000/main&prompt=login`}
-          />
+          <TripCreateButton title="ALONE" buttonPosition="left" link={`/`} />
           <div className="flex flex-col items-center mx-[44px]">
             <p className="font-extrabold text-[60px] leading-[75px]">
               PLAN YOUR TRIP
@@ -26,7 +22,7 @@ const TopBanner = () => {
               나만의 여행을 계획하세요
             </p>
           </div>
-          <TripCreateButton title="TEAM" buttonPosition="right" link="/team" />
+          <TripCreateButton title="TEAM" buttonPosition="right" link="/" />
         </div>
       </div>
     </div>

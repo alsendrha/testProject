@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const page = () => {
+const Login = () => {
   const params = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const code = params.get("code");
@@ -51,4 +51,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Login;
