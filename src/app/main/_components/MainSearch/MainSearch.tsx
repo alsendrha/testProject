@@ -3,9 +3,7 @@
 import { useOnclickOutside } from "@/hooks/useOnClickOutSide";
 import { useRef, useState } from "react";
 import Categories from "./Categories";
-import CloseButton from "./CloseButton";
 import MainSearchInput from "./MainSearchInput";
-import SearchButton from "./SearchButton";
 import SearchMenuList from "./SearchMenuList";
 
 type MainSearchProps = {
@@ -31,13 +29,13 @@ const MainSearch = ({
 
   return (
     <div className="h-[60px] bg-white flex items-center py-[13px] border-[#353535] rounded-[10px] border-[2px] pr-[12px] relative">
-      {menuOpen && <div className="w-full h-[60px] absolute top-0 z-10" />}
-      <div>
-        <Categories
-          categoryName={categoryName}
-          onClick={() => setMenuOpen(true)}
-        />
-      </div>
+      {menuOpen && (
+        <div className="w-full h-[60px] absolute top-0 z-10 cursor-pointer" />
+      )}
+      <Categories
+        categoryName={categoryName}
+        onClick={() => setMenuOpen(true)}
+      />
       <div className="w-[1px] h-full bg-[#CCCCCC]" />
       <MainSearchInput
         searchText={searchText}
@@ -47,15 +45,12 @@ const MainSearch = ({
             onClick();
           }
         }}
-      />
-      <CloseButton
-        searchText={searchText}
-        onClick={() => {
+        closeOnClick={() => {
           if (searchText === "") return;
           setSearchText("");
         }}
+        searchOnClick={onClick}
       />
-      <SearchButton onClick={onClick} />
       {menuOpen && (
         <SearchMenuList
           ref={categoryRef}
