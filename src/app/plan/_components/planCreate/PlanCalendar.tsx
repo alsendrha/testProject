@@ -31,6 +31,21 @@ const PlanCalendar = ({
     .rdp-month_caption {
         justify-content:center;
     }
+    .rdp-chevron{
+      fill:#D0FF00;
+    }
+    .rdp-today:not(.rdp-outside) {
+      color: #D0FF00;
+    }
+    .rdp-range_end .rdp-day_button{
+      background-color: #D0FF00;
+    }
+    .rdp-range_start .rdp-day_button{
+      background-color: #D0FF00;
+    }
+    .rdp-selected .rdp-day_button{
+    border:none;
+    }
 `;
 
   const handleRangeSelect = (range: DateRange | undefined) => {
