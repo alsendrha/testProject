@@ -54,14 +54,14 @@ const PlacePage = () => {
         onClick={getTourList}
       />
       <div className="w-full flex justify-center px-[30px]">
-        <div className="w-[1440px] flex flex-col items-center justify-center pt-[40px]">
+        <div className="w-[1440px] max-[1515px]:w-[1070px] max-[1146px]:w-[700px] max-[776px]:w-[330px] flex flex-col items-center justify-center pt-[40px]">
           <DropList
             rankingName={rankingName}
             setRankingName={setRankingName}
             numOfRowName={numOfRowName}
             setNumOfRowName={setNumOfRowName}
           />
-          <div className="pt-[40px] pb-[150px] flex justify-center items-center gap-[40px] flex-wrap">
+          <div className="pt-[40px] pb-[150px] flex justify-start items-center gap-[40px] flex-wrap">
             {isLoading ? (
               <Skeleton length={8} skeletonType="place" />
             ) : (

@@ -17,6 +17,11 @@
   transform: all 300ms ease-in-out;
 }
 
+.transition_css {
+  transform: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
 @keyframes fadeIn {
   from {
     transform: scale(0.5);
