@@ -70,7 +70,7 @@ const MainItemList = () => {
             onClick={getTourList}
           />
         </div>
-        <div className="w-full flex justify-center gap-[40px] flex-wrap mt-[111px]">
+        <div className="w-[1440px] max-[1460px]:w-[1070px] max-[1090px]:w-[700px] max-[720px]:w-[330px] flex justify-start gap-[40px] flex-wrap mt-[111px]">
           {isLoading ? (
             <Skeleton length={4} skeletonType="main" />
           ) : (
