@@ -42,6 +42,11 @@ const MainSearch = ({
       <MainSearchInput
         searchText={searchText}
         onChange={(e) => setSearchText(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onClick();
+          }
+        }}
       />
       <CloseButton
         searchText={searchText}

@@ -15,7 +15,6 @@ export const getDetailData = async ({ data }: getDetailDataProps) => {
       contentTypeId: data.contentTypeId,
     },
   });
-
   if (response.status === 200) {
     return response.data.response.body.items.item;
   }
