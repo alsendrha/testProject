@@ -4,7 +4,6 @@ import { useAlertOpen } from "@/store/alertStore";
 
 const CustomAlert = () => {
   const { isOpen, setIsOpen } = useAlertOpen();
-  console.log(isOpen);
   return (
     <>
       {isOpen && (
