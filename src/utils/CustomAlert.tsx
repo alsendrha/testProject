@@ -1,12 +1,10 @@
 "use client";
 
-import { useAlertOpen } from "@/store/alertStore";
-
 const CustomAlert = () => {
-  const { isOpen, setIsOpen } = useAlertOpen();
+  // const { isOpen, setIsOpen } = useAlertOpen();
   return (
     <>
-      {isOpen && (
+      {/* {isOpen && (
         <div className="fixed w-full h-full z-50 top-0 left-0 bg-black bg-opacity-20 flex items-center justify-center">
           <div className="w-[300px] h-[200px] flex flex-col items-center justify-center rounded-xl bg-white alert_animation ">
             <div className="py-[50px]">
@@ -18,14 +16,14 @@ const CustomAlert = () => {
               </div>
               <div
                 className="flex w-full h-full justify-center items-center"
-                onClick={() => setIsOpen(false)}
+                onClick={() => {}}
               >
                 취소
               </div>
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

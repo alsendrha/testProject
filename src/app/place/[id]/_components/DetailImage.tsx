@@ -7,7 +7,7 @@ const DetailImage = ({ image }: DetailImageProps) => {
   return (
     <div className="w-full h-[600px] relative">
       <Image
-        src={image ? image : "/images/no_image.png"}
+        src={image ? image : "/images/detail_no_image.png"}
         fill
         sizes="1"
         style={{ objectFit: "cover" }}

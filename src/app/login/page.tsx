@@ -1,14 +1,14 @@
 "use client";
 import { createClientApi } from "@/shared/api/client-api";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 
-const Login = () => {
+const LoginContent = () => {
   const params = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const code = params.get("code");
-  const navigate = useRouter();
+  // const navigate = useRouter();
 
   const kakaoLogin = async () => {
     setIsLoading(true);
@@ -18,10 +18,10 @@ const Login = () => {
         authorizationCode: code,
         socialType: "kakao",
       });
-      console.log(response);
+      console.log(response.headers);
       if (response.status === 200) {
         setIsLoading(false);
-        navigate.push("/main");
+        // navigate.push("/main");
       }
     } catch (error) {
       setIsLoading(false);
@@ -48,6 +48,14 @@ const Login = () => {
         버튼
       </Link>
     </div>
+  );
+};
+
+const Login = () => {
+  return (
+    <Suspense fallback={<div>로딩중</div>}>
+      <LoginContent />
+    </Suspense>
   );
 };
 
