@@ -1,4 +1,3 @@
-import React from "react";
 import TripTitle from "./TripTitle";
 
 type TripCreateButtonProps = {
