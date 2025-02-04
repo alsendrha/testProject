@@ -1,10 +1,24 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import PlanItemListTitle from "./PlanItemListTitle";
 import PlanListItem from "./PlanListItem";
 import PlanListPagination from "./PlanListPagination";
+import { getPlanList } from "../../_api";
+import { useToken } from "@/store/tokenStore";
 
 const PlanItemList = () => {
+  const { token } = useToken();
+  const [planList, setPlanList] = useState<any>([])
+  useEffect(() => {
+    const planList = async () => {
+      const planData = await getPlanList(token);
+      console.log('나와라', planData)
+      setPlanList(planData);
+    };
+    planList();
+  }, [])
+
   const items = [
     {
       id: 1,

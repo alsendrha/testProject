@@ -5,6 +5,9 @@ import "react-calendar/dist/Calendar.css";
 import PlanButton from "../PlanButton";
 import PlanDateSelect from "./PlanDateSelect";
 import PlanInput from "./PlanInput";
+import { postPlan } from "../../_api";
+import { useRouter } from "next/navigation";
+import { useToken } from "@/store/tokenStore";
 
 export type PlanDataTypes = {
   planTitle: string;
@@ -14,6 +17,8 @@ export type PlanDataTypes = {
 
 const PlanCreateContent = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { token } = useToken();
+  const navigate = useRouter();
   const [planData, setPlanData] = useState<PlanDataTypes>({
     planTitle: "",
     startDate: format(new Date(), "yyyy-MM-dd"),
@@ -34,9 +39,12 @@ const PlanCreateContent = () => {
       return;
     }
     try {
-      console.log("성공", planData);
+      await postPlan(planData, token);
+      navigate.push("/planList");
+
+      console.log("성공");
     } catch (error) {
-      console.log(error);
+      console.log('에러', error);
     }
   };
 

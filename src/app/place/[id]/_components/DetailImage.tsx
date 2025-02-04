@@ -10,7 +10,7 @@ const DetailImage = ({ image }: DetailImageProps) => {
         src={image ? image : "/images/detail_no_image.png"}
         fill
         sizes="1"
-        style={{ objectFit: "cover" }}
+        style={{ objectFit: "cover", objectPosition: "bottom" }}
         alt="디테일 이미지"
         priority
       />

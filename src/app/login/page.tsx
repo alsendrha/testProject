@@ -2,24 +2,26 @@
 import H27Title from "@/components/subTitle/H27Title";
 import TopBanner from "@/components/topBanner/TopBanner";
 import { createClientApi } from "@/shared/api/client-api";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import LoginButton from "./_components/LoginButton";
 import LoginForm from "./_components/LoginForm";
 import LoginModal from "./_components/loginModal/LoginModal";
 import NotUserContent from "./_components/NotUserContent";
 import SocialLogin from "./_components/SocialLogin";
+import { useToken } from "@/store/tokenStore";
 
 const LoginContent = () => {
   const params = useSearchParams();
   const [modalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { setToken } = useToken();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
   const code = params.get("code");
-  // const navigate = useRouter();
+  const navigate = useRouter();
 
   const userLogin = async () => {
     console.log(loginData);
@@ -33,10 +35,13 @@ const LoginContent = () => {
         authorizationCode: code,
         socialType: "kakao",
       });
-      console.log(response.headers);
+
       if (response.status === 200) {
         setIsLoading(false);
-        // navigate.push("/main");
+        setToken(response.headers['authorization'].split(' ')[1]);
+        localStorage.setItem('token', response.headers['authorization'].split(' ')[1]);
+        localStorage.setItem('refreshToken', response.headers['refresh-token']);
+        navigate.push("/");
       }
     } catch (error) {
       setIsLoading(false);
