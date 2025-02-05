@@ -18,7 +18,6 @@ export type PlanDataTypes = {
 const PlanCreateContent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { token } = useToken();
-  const navigate = useRouter();
   const [planData, setPlanData] = useState<PlanDataTypes>({
     planTitle: "",
     startDate: format(new Date(), "yyyy-MM-dd"),
@@ -39,10 +38,9 @@ const PlanCreateContent = () => {
       return;
     }
     try {
-      await postPlan(planData, token);
-      navigate.push("/planList");
-
-      console.log("성공");
+      const asd = await postPlan(planData, token);
+      // navigate.push("/planList");
+      console.log("성공", asd);
     } catch (error) {
       console.log('에러', error);
     }
