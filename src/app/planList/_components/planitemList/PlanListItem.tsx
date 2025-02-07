@@ -15,7 +15,7 @@ const PlanListItem = ({ item, onClick }: PlanListItemProps) => {
   return (
     <div className="border-y h-[56px] flex items-center gap-[40px] pr-[20.04px]">
       <Link
-        href={"/planView"}
+        href={`/planList/${item.id.toString()}`}
         className="w-full flex items-center gap-[40px] border-[#EEEEEE]"
       >
         <div className="flex items-center justify-end w-[27.05px]">
