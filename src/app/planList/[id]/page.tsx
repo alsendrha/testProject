@@ -1,8 +1,18 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 import PlanDetailTop from "./_components/detailTop/PlanDetailTop";
+import PlanDetailDayList from "./_components/planDay/PlanDetailDayList";
 import PlanDetailChat from "./_components/PlanDetailChat";
 import PlanDetailMap from "./_components/PlanDetailMap";
 
-const PlanDetailPage = () => {
+const PlanDetailContent = () => {
+  const params = useSearchParams();
+  const day = params.get("day");
+  const [isClicked, setIsClicked] = useState(0);
+  console.log(isClicked);
+
   return (
     <div className="pt-[100px] flex items-center justify-center">
       <div className="pt-[100px] w-[1440px]">
@@ -10,20 +20,24 @@ const PlanDetailPage = () => {
         <div className="pt-[40px] w-full flex items-start justify-between">
           <div className="w-[1000px]">
             <PlanDetailMap />
-            <div className="w-full mt-[40px] flex items-center">
-              <div className="border border-b-0 border-[#DDDDDD] rounded-t-[20px] px-[30px] py-[15px]">
-                <div className="flex items-center h-5">
-                  <p className="text-[#AAAAAA] font-medium leading-none">
-                    DAY1
-                  </p>
-                </div>
-              </div>
-            </div>
+            <PlanDetailDayList
+              day={day!}
+              isClicked={isClicked}
+              setIsClicked={setIsClicked}
+            />
           </div>
           <PlanDetailChat />
         </div>
       </div>
     </div>
+  );
+};
+
+const PlanDetailPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PlanDetailContent />
+    </Suspense>
   );
 };
 

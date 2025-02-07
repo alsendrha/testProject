@@ -4,7 +4,7 @@ export async function getPlanList(token: string) {
   const api = createClientApi();
   const response = await api.get("/course", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: token,
     },
   });
   if (response.status === 200) {

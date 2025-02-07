@@ -1,15 +1,15 @@
 "use client";
 import H27Title from "@/components/subTitle/H27Title";
 import TopBanner from "@/components/topBanner/TopBanner";
-import { createClientApi } from "@/shared/api/client-api";
+import { useToken } from "@/store/tokenStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import { postLogin } from "./_api";
 import LoginButton from "./_components/LoginButton";
 import LoginForm from "./_components/LoginForm";
 import LoginModal from "./_components/loginModal/LoginModal";
 import NotUserContent from "./_components/NotUserContent";
 import SocialLogin from "./_components/SocialLogin";
-import { useToken } from "@/store/tokenStore";
 
 const LoginContent = () => {
   const params = useSearchParams();
@@ -29,28 +29,18 @@ const LoginContent = () => {
 
   const kakaoLogin = async () => {
     setIsLoading(true);
-    const api = createClientApi();
-    try {
-      const response = await api.post("/oauth/token", {
-        authorizationCode: code,
-        socialType: "kakao",
-      });
-
-      if (response.status === 200) {
-        setIsLoading(false);
-        setToken(response.headers['authorization'].split(' ')[1]);
-        localStorage.setItem('token', response.headers['authorization'].split(' ')[1]);
-        localStorage.setItem('refreshToken', response.headers['refresh-token']);
-        navigate.push("/");
-      }
-    } catch (error) {
-      setIsLoading(false);
-      console.log(error);
+    const login = await postLogin({ code: code!, socialType: "kakao" });
+    if (login) {
+      setToken(login.headers["authorization"]);
+      localStorage.setItem("token", login.headers["authorization"]);
+      localStorage.setItem("refreshToken", login.headers["refresh-token"]);
+      navigate.push("/");
     }
   };
 
   useEffect(() => {
     if (code) {
+      console.log("code", code);
       kakaoLogin();
     }
   }, [code]);

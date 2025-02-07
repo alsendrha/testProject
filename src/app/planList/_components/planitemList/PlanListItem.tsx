@@ -6,6 +6,7 @@ type PlanListItemProps = {
     id: number;
     title: string;
     date: string;
+    day: string;
     createdDate: string;
   };
   onClick: () => void;
@@ -15,7 +16,11 @@ const PlanListItem = ({ item, onClick }: PlanListItemProps) => {
   return (
     <div className="border-y h-[56px] flex items-center gap-[40px] pr-[20.04px]">
       <Link
-        href={`/planList/${item.id.toString()}`}
+        href={{
+          pathname: `/planList/${item.id}
+        `,
+          query: { day: item.day },
+        }}
         className="w-full flex items-center gap-[40px] border-[#EEEEEE]"
       >
         <div className="flex items-center justify-end w-[27.05px]">
