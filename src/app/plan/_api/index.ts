@@ -2,7 +2,7 @@ import { createClientApi } from "@/shared/api/client-api";
 
 export async function postPlan(postData: any, token: string) {
   console.log("postData", token);
-  console.log("postData", postData);
+
   try {
     const api = createClientApi();
     const response = await api.post(
