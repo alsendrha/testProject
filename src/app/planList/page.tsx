@@ -1,5 +1,5 @@
 import PlanCreateButton from "./_components/PlanCreateButton";
-import PlanItemList from "./_components/planitemList/PlanItemList";
+import PlanItemList from "./_components/planItemList/PlanItemList";
 import PlanListMenuButton from "./_components/PlanListMenuButton";
 import PlanListTitle from "./_components/PlanListTitle";
 

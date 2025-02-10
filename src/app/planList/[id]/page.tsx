@@ -14,19 +14,29 @@ const PlanDetailContent = () => {
   console.log(isClicked);
 
   return (
-    <div className="pt-[100px] flex items-center justify-center">
-      <div className="pt-[100px] w-[1440px]">
-        <PlanDetailTop />
-        <div className="pt-[40px] w-full flex items-start justify-between">
-          <div className="w-[1000px]">
-            <PlanDetailMap />
-            <PlanDetailDayList
-              day={day!}
-              isClicked={isClicked}
-              setIsClicked={setIsClicked}
-            />
+    <div className="pt-[100px] pb-[45px] flex flex-col items-center justify-center">
+      <div className=" flex items-center justify-center">
+        <div className="pt-[100px] w-[1440px]">
+          <PlanDetailTop />
+          <div className="pt-[40px] w-full flex items-start justify-between">
+            <div className="w-[1000px]">
+              <PlanDetailMap />
+              <PlanDetailDayList
+                day={day!}
+                isClicked={isClicked}
+                setIsClicked={setIsClicked}
+              />
+            </div>
+            <PlanDetailChat />
           </div>
-          <PlanDetailChat />
+        </div>
+      </div>
+      <div
+        className="px-[39px] py-[16.5px] mt-[45px] border border-[#CCCCCC] rounded-[30px] cursor-pointer"
+        onClick={() => console.log("저장하기")}
+      >
+        <div className="flex items-center h-[25px]">
+          <p className="text-[20px] font-medium">저장하기</p>
         </div>
       </div>
     </div>
