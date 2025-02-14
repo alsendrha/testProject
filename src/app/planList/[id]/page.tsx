@@ -6,6 +6,7 @@ import PlanDetailTop from "./_components/detailTop/PlanDetailTop";
 import PlanDetailDayList from "./_components/planDay/PlanDetailDayList";
 import PlanDetailChat from "./_components/PlanDetailChat";
 import PlanDetailMap from "./_components/PlanDetailMap";
+import SaveButton from "./_components/SaveButton";
 
 const PlanDetailContent = () => {
   const params = useSearchParams();
@@ -31,14 +32,7 @@ const PlanDetailContent = () => {
           </div>
         </div>
       </div>
-      <div
-        className="px-[39px] py-[16.5px] mt-[45px] border border-[#CCCCCC] rounded-[30px] cursor-pointer"
-        onClick={() => console.log("저장하기")}
-      >
-        <div className="flex items-center h-[25px]">
-          <p className="text-[20px] font-medium">저장하기</p>
-        </div>
-      </div>
+      <SaveButton onClick={() => console.log("저장하기")} />
     </div>
   );
 };

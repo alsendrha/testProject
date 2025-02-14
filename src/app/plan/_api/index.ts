@@ -1,8 +1,6 @@
 import { createClientApi } from "@/shared/api/client-api";
 
 export async function postPlan(postData: any, token: string) {
-  console.log("postData", token);
-
   try {
     const api = createClientApi();
     const response = await api.post(
@@ -20,7 +18,7 @@ export async function postPlan(postData: any, token: string) {
       }
     );
     if (response.status === 200) {
-      return response.data;
+      return response;
     }
   } catch (error) {
     console.log("error", error);

@@ -17,6 +17,10 @@
   transform: all 300ms ease-in-out;
 }
 
+a svg:hover #nevIon {
+  fill: #aed400;
+}
+
 .transition_css {
   transform: all 300ms ease-in-out;
   transition: all 300ms ease-in-out;

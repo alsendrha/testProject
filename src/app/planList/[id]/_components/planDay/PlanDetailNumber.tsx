@@ -26,7 +26,7 @@ const PlanDetailNumber = ({
       <div
         className={`h-10 bg-[#FCFFF2] ${
           number === 0 ? "border-l" : ""
-        } border-[#DDDDDD] border-b`}
+        } border-[#DDDDDD]`}
       />
     </div>
   );
