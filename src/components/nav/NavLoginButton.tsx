@@ -1,22 +1,37 @@
 "use client";
 
-import { useInitToken, useToken } from "@/store/tokenStore";
 import NevMenuIcon from "@/utils/svg/NevMenuIcon";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Cookies } from "react-cookie";
 const NavLoginButton = () => {
-  useInitToken();
-  const token = useToken((state) => state.token);
-  const setToken = useToken((state) => state.setToken);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useRouter();
+  const cookies = new Cookies();
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
-    setToken("");
+    cookies.remove("token");
+    cookies.remove("refreshToken");
+    setIsLoggedIn(false);
+    navigate.push("/");
   };
+
+  useEffect(() => {
+    const token = cookies.get("token");
+    setIsLoggedIn(!!token);
+    const handleCookieChange = () => {
+      const token = cookies.get("token");
+      setIsLoggedIn(!!token);
+    };
+    cookies.addChangeListener(handleCookieChange);
+    return () => {
+      cookies.removeChangeListener(handleCookieChange);
+    };
+  }, [cookies]);
+
   return (
     <>
-      {!token ? (
+      {!isLoggedIn ? (
         <Link href={"/login"}>
           <div className="w-[162.5px] flex justify-end self-start">
             <div className="h-[40px] border border-[rgba(0,0,0,0.5)] hover:bg-[#FBFFE6] group hover:border-[#AED400] rounded-[38px] flex items-center justify-center leading-0 px-[22px] py-[9px]">

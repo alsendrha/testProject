@@ -1,21 +1,26 @@
 "use client";
 import H27Title from "@/components/subTitle/H27Title";
 import TopBanner from "@/components/topBanner/TopBanner";
-import { useToken } from "@/store/tokenStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { postLogin } from "./_api";
+import { Cookies } from "react-cookie";
+import { useEmailLogin, useKakaoLogin } from "./_api";
 import LoginButton from "./_components/LoginButton";
 import LoginForm from "./_components/LoginForm";
 import LoginModal from "./_components/loginModal/LoginModal";
 import NotUserContent from "./_components/NotUserContent";
 import SocialLogin from "./_components/SocialLogin";
+export type emailLoginData = {
+  email: string;
+  password: string;
+};
 
 const LoginContent = () => {
   const params = useSearchParams();
   const [modalOpen, setModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const { setToken } = useToken();
+  const cookies = new Cookies();
+  const { mutate } = useEmailLogin();
+  const { mutate: kakaoMutate } = useKakaoLogin();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -23,30 +28,22 @@ const LoginContent = () => {
   const code = params.get("code");
   const navigate = useRouter();
 
-  const userLogin = async () => {
-    console.log(loginData);
-  };
-
-  const kakaoLogin = async () => {
-    setIsLoading(true);
-    const login = await postLogin({ code: code!, socialType: "kakao" });
-    if (login) {
-      setToken(login.headers["authorization"]);
-      localStorage.setItem("token", login.headers["authorization"]);
-      localStorage.setItem("refreshToken", login.headers["refresh-token"]);
-      navigate.push("/");
-    }
-  };
-
   useEffect(() => {
     if (code) {
       console.log("code", code);
-      kakaoLogin();
+      kakaoMutate(
+        { code, socialType: "kakao" },
+        {
+          onSuccess: (data) => {
+            cookies.set("token", data!.headers["authorization"]);
+            cookies.set("refreshToken", data!.headers["refresh-token"]);
+            navigate.push("/");
+          },
+        }
+      );
     }
   }, [code]);
 
-  if (isLoading) return <div className="pt-[100px] w-full h-full">로딩중</div>;
-  console.log("dd", modalOpen);
   return (
     <div className="w-full flex flex-col justify-center items-center">
       {modalOpen && <LoginModal setModalOpen={setModalOpen} />}
@@ -54,7 +51,17 @@ const LoginContent = () => {
       <div className="pt-[200px] flex flex-col w-[562px]">
         <H27Title title="계정에 로그인 하세요" />
         <LoginForm loginData={loginData} setLoginData={setLoginData} />
-        <LoginButton onClick={userLogin} />
+        <LoginButton
+          onClick={() =>
+            mutate(loginData, {
+              onSuccess: (data) => {
+                cookies.set("token", data!["authorization"]);
+                cookies.set("refreshToken", data!["refresh-token"]);
+                navigate.push("/");
+              },
+            })
+          }
+        />
         <SocialLogin
           loginType="kakao"
           link="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=438cf3e1fed5cae3fa8aba30fd11373c&redirect_uri=http://localhost:3000/login&prompt=login"

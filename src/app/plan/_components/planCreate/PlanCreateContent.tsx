@@ -1,14 +1,13 @@
 "use client";
+
+import { useGetPlanList } from "@/app/planList/_api";
 import { format } from "date-fns";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import "react-calendar/dist/Calendar.css";
+import { useCreatePlan } from "../../_api";
 import PlanButton from "../PlanButton";
 import PlanDateSelect from "./PlanDateSelect";
 import PlanInput from "./PlanInput";
-import { postPlan } from "../../_api";
-import { useRouter } from "next/navigation";
-import { useToken } from "@/store/tokenStore";
-
 export type PlanDataTypes = {
   planTitle: string;
   startDate: string;
@@ -17,7 +16,9 @@ export type PlanDataTypes = {
 
 const PlanCreateContent = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { token } = useToken();
+  const navigate = useRouter();
+  const { mutate } = useCreatePlan();
+  const { refetch } = useGetPlanList();
   const [planData, setPlanData] = useState<PlanDataTypes>({
     planTitle: "",
     startDate: format(new Date(), "yyyy-MM-dd"),
@@ -38,16 +39,19 @@ const PlanCreateContent = () => {
       return;
     }
     try {
-      const asd = await postPlan(planData, token);
-      // navigate.push("/planList");
-      console.log("성공", asd);
+      mutate(planData, {
+        onSuccess: () => {
+          refetch();
+          navigate.push("/planList");
+        },
+      });
     } catch (error) {
-      console.log('에러', error);
+      console.log(error);
     }
   };
 
   return (
-    <div className="w-full flex flex-col items-center mt-[61px]">
+    <div className="mt-[61px] flex w-full flex-col items-center">
       <div className="relative flex flex-col items-center">
         <PlanInput
           planTitle={planData.planTitle}
@@ -61,7 +65,7 @@ const PlanCreateContent = () => {
           setSelectedDate={setPlanData}
         />
       </div>
-      <div className="w-[562px] mt-[35px]">
+      <div className="mt-[35px] w-[562px]">
         <div onClick={handleCreatePlan}>
           <PlanButton bType="create" title="플랜 생성하기" />
         </div>

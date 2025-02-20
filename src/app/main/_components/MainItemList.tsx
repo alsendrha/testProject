@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getData } from "../_api";
+import { useGetTourData } from "../_api";
 import MainSearch from "./MainSearch/MainSearch";
 import MenuItem from "./MenuItem";
 import MoreButton from "./MoreButton";
@@ -31,33 +31,27 @@ type MainItemListProps = {
 };
 
 const MainItemList = () => {
-  const [tourList, setTourList] = useState<MainItemListProps[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [listType, setListType] = useState(12);
   const [searchText, setSearchText] = useState("");
-
-  const getTourList = async () => {
-    try {
-      setIsLoading(true);
-      const data = await getData({
-        keyword: searchText,
-        arrange: "A",
-        numOfRows: 4,
-        pageNo: 1,
-        contentTypeId: listType,
-      });
-      setIsLoading(false);
-      setTourList(data ?? []);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
+  const [text, setText] = useState("");
+  const [textOn, setTextOn] = useState(false);
+  const { data, isLoading, refetch } = useGetTourData({
+    keyword: text,
+    arrange: "A",
+    numOfRows: 4,
+    pageNo: 1,
+    contentTypeId: listType,
+  });
 
   useEffect(() => {
-    getTourList();
-  }, []);
+    refetch();
+  }, [textOn]);
+
+  const handleSearchClick = () => {
+    setTextOn(!textOn);
+    setText(searchText);
+    refetch();
+  };
 
   return (
     <>
@@ -67,14 +61,14 @@ const MainItemList = () => {
             searchText={searchText}
             setSearchText={setSearchText}
             setListType={setListType}
-            onClick={getTourList}
+            onClick={handleSearchClick}
           />
         </div>
-        <div className="w-[1440px] max-[1460px]:w-[1070px] max-[1090px]:w-[700px] max-[720px]:w-[330px] flex justify-start gap-[40px] flex-wrap mt-[111px]">
+        <div className="mt-[111px] flex w-[1440px] flex-wrap justify-start gap-[40px] max-[1460px]:w-[1070px] max-[1090px]:w-[700px] max-[720px]:w-[330px]">
           {isLoading ? (
             <Skeleton length={4} skeletonType="main" />
           ) : (
-            tourList.map((item) => (
+            data?.map((item: MainItemListProps) => (
               <MenuItem key={item.contentid} item={item} />
             ))
           )}

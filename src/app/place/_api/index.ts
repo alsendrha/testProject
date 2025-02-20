@@ -1,4 +1,5 @@
 import { createClientApi } from "@/shared/api/client-api";
+import { useQuery } from "@tanstack/react-query";
 
 type getDetailDataProps = {
   data: {
@@ -18,4 +19,9 @@ export const getDetailData = async ({ data }: getDetailDataProps) => {
   if (response.status === 200) {
     return response.data.response.body.items.item;
   }
+};
+
+export const useGetDetailData = (data: getDetailDataProps) => {
+  const queryFn = () => getDetailData({ data: data.data });
+  return useQuery({ queryKey: ["detailData", data], queryFn });
 };

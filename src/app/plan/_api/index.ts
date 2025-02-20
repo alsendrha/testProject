@@ -1,7 +1,10 @@
 import { createClientApi } from "@/shared/api/client-api";
+import { useMutation } from "@tanstack/react-query";
+import { Cookies } from "react-cookie";
 
-export async function postPlan(postData: any, token: string) {
+export async function postPlan(postData: any) {
   try {
+    const cookie = new Cookies();
     const api = createClientApi();
     const response = await api.post(
       "/course",
@@ -13,15 +16,20 @@ export async function postPlan(postData: any, token: string) {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: cookie.get("token"),
         },
       }
     );
     if (response.status === 200) {
-      return response;
+      return response.data;
     }
   } catch (error) {
     console.log("error", error);
-    throw error;
+    throw new Error("error");
   }
 }
+
+export const useCreatePlan = () => {
+  const mutationFn = (postData: any) => postPlan(postData);
+  return useMutation({ mutationFn });
+};

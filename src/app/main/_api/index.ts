@@ -1,4 +1,5 @@
 import { createClientApi } from "@/shared/api/client-api";
+import { useQuery } from "@tanstack/react-query";
 
 type ParamsType = {
   numOfRows: number;
@@ -21,3 +22,8 @@ export async function getData(params: ParamsType) {
     return response.data.response.body.items.item;
   }
 }
+
+export const useGetTourData = (params: ParamsType) => {
+  const queryFn = () => getData(params);
+  return useQuery({ queryKey: ["tour", params], queryFn, enabled: false });
+};

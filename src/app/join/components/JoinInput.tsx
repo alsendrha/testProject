@@ -8,6 +8,7 @@ type JoinInputProps = {
   title: string;
   placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
 };
 
 const JoinInput = ({
@@ -17,6 +18,7 @@ const JoinInput = ({
   title,
   placeholder,
   onChange,
+  onClick,
 }: JoinInputProps) => {
   return (
     <div
@@ -33,6 +35,14 @@ const JoinInput = ({
           placeholder={placeholder}
           onChange={onChange}
         />
+        {title === "닉네임" && (
+          <div
+            className="ml-3 w-[100px] h-[60px] flex items-center justify-center border rounded-xl cursor-pointer"
+            onClick={onClick}
+          >
+            중복확인
+          </div>
+        )}
         {title === "아이디(이메일)" && value !== "" && (
           <JoinMessage title={valid ? "사용가능" : "사용 불가능"} />
         )}

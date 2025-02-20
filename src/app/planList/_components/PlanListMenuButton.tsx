@@ -1,9 +1,9 @@
-"use client";
+type PlanListMenuButtonProps = {
+  isOpen: number;
+  setIsOpen: (id: number) => void;
+};
 
-import { useAlertOpen } from "@/store/alertStore";
-
-const PlanListMenuButton = () => {
-  const { isOpen, setIsOpen } = useAlertOpen();
+const PlanListMenuButton = ({ isOpen, setIsOpen }: PlanListMenuButtonProps) => {
   const buttonList = [
     { id: 1, name: "내 정보" },
     { id: 2, name: "내 플랜 보기" },
@@ -12,7 +12,7 @@ const PlanListMenuButton = () => {
 
   return (
     <>
-      <div className="pt-[30px] flex justify-center gap-[10px] items-center">
+      <div className="flex justify-center gap-[10px] items-center">
         {buttonList.map((button) => (
           <div
             key={button.id}

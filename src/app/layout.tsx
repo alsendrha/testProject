@@ -1,4 +1,5 @@
 import Footer from "@/components/Footer";
+import ReactQueryProvider from "@/reactQuery/Provider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import MainNav from "../components/nav/MainNav";
@@ -35,9 +36,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased w-full max-w-[1920px]`}
       >
-        <MainNav />
-        {children}
-        <Footer />
+        <ReactQueryProvider>
+          <MainNav />
+          {children}
+          <Footer />
+        </ReactQueryProvider>
       </body>
     </html>
   );

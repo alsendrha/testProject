@@ -2,7 +2,9 @@
 
 import H27Title from "@/components/subTitle/H27Title";
 import TopBanner from "@/components/topBanner/TopBanner";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useJoin, userNicknameCheck } from "./_api";
 import JoinInputForm from "./components/JoinInputForm";
 import JoinTitle from "./components/JoinTitle";
 
@@ -22,7 +24,8 @@ const JoinPage = () => {
     password: "",
     passwordCheck: "",
   });
-
+  const { mutate } = useJoin();
+  const navigate = useRouter();
   const isEmailValid = (email: string) => {
     const emailRegex =
       /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
@@ -30,7 +33,9 @@ const JoinPage = () => {
   };
 
   const isPasswordValid = (password: string) => {
-    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,16}$/.test(password);
+    return /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,16}$/.test(
+      password
+    );
   };
 
   const isPasswordCheckValid = (password: string, passwordCheck: string) => {
@@ -46,7 +51,22 @@ const JoinPage = () => {
       alert("입력하신 정보를 확인해주세요.");
       return;
     } else {
-      console.log("통과");
+      mutate(joinData, {
+        onSuccess: () => {
+          alert("회원가입이 완료되었습니다. 이메일을 확인해주세요");
+          navigate.push("/login");
+        },
+      });
+    }
+  };
+
+  const handleNicknameCheck = async () => {
+    try {
+      const checked = await userNicknameCheck(joinData.nickname);
+      console.log("checked", checked);
+      return checked;
+    } catch (error) {
+      console.log("error", error);
     }
   };
 
@@ -62,6 +82,7 @@ const JoinPage = () => {
             isEmailValid={isEmailValid}
             isPasswordValid={isPasswordValid}
             isPasswordCheckValid={isPasswordCheckValid}
+            handleNicknameCheck={handleNicknameCheck}
           />
           <div className="mt-[50px]">
             <div

@@ -1,8 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { getDetailData } from "../_api";
+import { useGetDetailData } from "../_api";
 import DetailImage from "./_components/DetailImage";
 import DetailMap from "./_components/DetailMap";
 import DetailOverview from "./_components/DetailOverview";
@@ -40,8 +39,12 @@ type DetailData = {
 
 const DetailPage = () => {
   const params = useParams();
-  const [isLoading, setIsLoading] = useState(false);
-  const [detailData, setDetailData] = useState([]);
+  const { data, isLoading } = useGetDetailData({
+    data: {
+      contentId: Number.parseInt(params.id!.toString()!.split("t")[0]),
+      contentTypeId: Number.parseInt(params.id!.toString()!.split("t")[1]),
+    },
+  });
   const contentList = [
     "장소명",
     "문의 및 안내",
@@ -49,34 +52,12 @@ const DetailPage = () => {
     "주소",
     "홈페이지",
   ];
-  const getData = async () => {
-    try {
-      setIsLoading(true);
-      const data = await getDetailData({
-        data: {
-          contentId: Number.parseInt(params.id!.toString()!.split("t")[0]),
-          contentTypeId: Number.parseInt(params.id!.toString()!.split("t")[1]),
-        },
-      });
-      setIsLoading(false);
-      setDetailData(data);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
   return (
     <>
       {isLoading ? (
         <DetailSkeleton />
       ) : (
-        detailData.map((data: DetailData) => (
+        data.map((data: DetailData) => (
           <div key={data.contentid} className="pt-[100px]">
             <DetailTopTitle data={data} />
             <DetailImage image={data.firstimage} />
